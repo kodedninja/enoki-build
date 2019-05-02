@@ -19,5 +19,8 @@
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
     "parse-entities": "^1.2.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
   }
 }

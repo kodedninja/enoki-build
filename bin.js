@@ -3,7 +3,6 @@
 var minimist = require('minimist')
 var chalk = require('chalk')
 var dedent = require('dedent')
-var assert = require('assert')
 var path = require('path')
 var build = require('.')
 
@@ -11,7 +10,7 @@ var argv = minimist(process.argv.slice(2), {
   alias: {
     'help': 'h',
     'version': 'v',
-    'output': 'o',
+    'output': 'o'
   },
   default: {
     app: './index.js',
