@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A simple static-site generator for Enoki sites",
   "main": "index.js",
+  "bin": "bin.js",
   "scripts": {
     "test": "standard"
   },

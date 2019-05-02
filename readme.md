@@ -5,6 +5,8 @@
 
 A simple static-site generator for Enoki sites
 
+#### `Work In Progress`
+
 ## Installation
 ```
 npm i enoki-build
