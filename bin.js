@@ -14,10 +14,10 @@ var argv = minimist(process.argv.slice(2), {
     'output': 'o',
   },
   default: {
-    content: './content',
     app: './index.js',
-    output: './public',
-    index: './index.html'
+    content: './content',
+    index: './index.html',
+    output: './public'
   },
   boolean: [
     'help',
@@ -28,16 +28,23 @@ var argv = minimist(process.argv.slice(2), {
 if (argv.help) {
   console.log(dedent`
     \n${chalk.dim('usage')}
-      ${chalk.yellow.bold('build')} [opts] <entry>
+      ${chalk.green.bold('enoki-build')} [opts] [directories to copy]
     ${chalk.dim('options')}
+      --app                   the file where the choo app's exported (./index.js)
+      --content               content directory (./content)
       --help, -h              show this help text
+      --index                 path of the index.html (./index.html)
+      --output, -o            output directory (./public)
       --version, -v           print version
     ${chalk.dim('examples')}
       ${chalk.bold('start build')}
-      enoki-build
+      $ enoki-build
 
-      ${chalk.bold('start build with different content folder')}
-      enoki-build --content ../content
+      ${chalk.bold('start build with different content folder and index')}
+      $ enoki-build --content ../content --index ./random/index.html
+
+      ${chalk.bold('define directories to copy to the output')}
+      $ enoki-build assets ../bundles
   `, '\n')
   process.exit(0)
 }
