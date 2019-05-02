@@ -1,0 +1,23 @@
+{
+  "name": "enoki-build",
+  "version": "0.0.0",
+  "description": "A simple static-site generator for Enoki sites",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/kodedninja/enoki-build"
+  },
+  "author": "kodedninja",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "dedent": "^0.7.0",
+    "hypha": "^0.4.5",
+    "minimist": "^1.2.0",
+    "ncp": "^2.0.0",
+    "parse-entities": "^1.2.1"
+  }
+}
