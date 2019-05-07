@@ -26,7 +26,7 @@ module.exports = function (options) {
   // copy directories
   options.copyDirs.map(dir => {
     var srcPath = path.resolve(process.cwd(), dir)
-    var destPath =`${options.outputPath}/${path.basename(dir)}`
+    var destPath = `${options.outputPath}/${path.basename(dir)}`
     ncp(srcPath, destPath, function (err) {
       if (err) throw err
     })
