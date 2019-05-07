@@ -6,7 +6,7 @@ var ncp = require('ncp')
 var path = require('path')
 var rmrf = require('rimraf')
 
-module.exports = function (options) {
+module.exports = async function (options) {
   var content = hypha.readSiteSync(options.contentSrc, { parent: true })
 
   // require choo app and check if it's valid
@@ -23,6 +23,12 @@ module.exports = function (options) {
   // rehydration
   indexHtml = indexHtml.replace('<!-- @head -->', `<script>window.initialState=${JSON.stringify(state)}</script>`)
 
+  // clean directory and ensure it exists
+  if (fs.existsSync(options.outputPath)) {
+    await rmDir(options.outputPath)
+  }
+  fs.mkdirSync(options.outputPath)
+
   // copy directories
   options.copyDirs.map(dir => {
     var srcPath = path.resolve(process.cwd(), dir)
@@ -31,12 +37,6 @@ module.exports = function (options) {
       if (err) throw err
     })
   })
-
-  // clean directory and ensure it exists
-  if (fs.existsSync(options.outputPath)) {
-    rmrf.sync(options.outputPath)
-  }
-  fs.mkdirSync(options.outputPath)
 
   // walk through all the pages and write them
   Object.keys(content).map(path => {
@@ -49,5 +49,14 @@ module.exports = function (options) {
     !fs.existsSync(outputPath) && fs.mkdirSync(outputPath)
 
     fs.writeFileSync(outputPath + '/index.html', resHtml)
+  })
+}
+
+function rmDir (outputPath) {
+  return new Promise(function (resolve) {
+    rmrf(outputPath, function (err) {
+      if (err) throw err
+      resolve()
+    })
   })
 }
