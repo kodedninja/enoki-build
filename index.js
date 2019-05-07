@@ -4,6 +4,7 @@ var fs = require('fs')
 var decode = require('parse-entities')
 var ncp = require('ncp')
 var path = require('path')
+var rmrf = require('rimraf')
 
 module.exports = function (options) {
   var content = hypha.readSiteSync(options.contentSrc, { parent: true })
@@ -25,15 +26,17 @@ module.exports = function (options) {
   // copy directories
   options.copyDirs.map(dir => {
     var srcPath = path.resolve(process.cwd(), dir)
-    ncp(srcPath, `${options.outputPath}/${dir}`, function (err) {
-      if (err) {
-        return console.err(err)
-      }
+    var destPath =`${options.outputPath}/${path.basename(dir)}`
+    ncp(srcPath, destPath, function (err) {
+      if (err) throw err
     })
   })
 
-  // ensure the directory exists
-  !fs.existsSync(options.outputPath) && fs.mkdirSync(options.outputPath)
+  // clean directory and ensure it exists
+  if (fs.existsSync(options.outputPath)) {
+    rmrf.sync(options.outputPath)
+  }
+  fs.mkdirSync(options.outputPath)
 
   // walk through all the pages and write them
   Object.keys(content).map(path => {
