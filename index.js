@@ -29,33 +29,62 @@ module.exports = async function (options) {
   }
   fs.mkdirSync(options.outputPath)
 
+  // make the content folder for files
+  // this way we can use the same href on dat and on the built http
+  fs.mkdirSync(options.outputPath + '/content')
+
   // copy directories
-  options.copyDirs.map(dir => {
+  options.copyDirs.map(async dir => {
     var srcPath = path.resolve(process.cwd(), dir)
     var destPath = `${options.outputPath}/${path.basename(dir)}`
-    ncp(srcPath, destPath, function (err) {
-      if (err) throw err
-    })
+    await copy(srcPath, destPath)
   })
 
   // walk through all the pages and write them
   Object.keys(content).map(path => {
     var outputPath = options.outputPath + path
+    var contentPath = options.outputPath + '/content' + path
     var body = app.toString(path, state)
 
     var resHtml = indexHtml.replace('<!-- @content -->', decode(body))
 
     // ensure the directory exists
     !fs.existsSync(outputPath) && fs.mkdirSync(outputPath)
+    !fs.existsSync(contentPath) && fs.mkdirSync(contentPath)
 
+    // write content
     fs.writeFileSync(outputPath + '/index.html', resHtml)
+    // copy static files
+    Object.keys(content[path].files).map(async filename => {
+      var file = content[path].files[filename]
+      try {
+        await copy(file.source, `${contentPath}/${file.filename}`)
+      } catch (err) {
+        console.error(err)
+      }
+    })
   })
 }
 
 function rmDir (outputPath) {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve, reject) {
     rmrf(outputPath, function (err) {
-      if (err) throw err
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve()
+    })
+  })
+}
+
+function copy (srcPath, destPath) {
+  return new Promise(function (resolve, reject) {
+    ncp(srcPath, destPath, function (err) {
+      if (err) {
+        reject(err)
+        return
+      }
       resolve()
     })
   })
