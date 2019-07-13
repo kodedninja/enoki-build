@@ -46,7 +46,9 @@ module.exports = async function (options) {
     var contentPath = options.outputPath + '/content' + path
     var body = app.toString(path, state)
 
-    var resHtml = indexHtml.replace('<!-- @content -->', decode(body))
+    var resHtml = indexHtml
+      .replace('<!-- @content -->', decode(body))
+      .replace('<!-- @title -->', app.state.title)
 
     // ensure the directory exists
     !fs.existsSync(outputPath) && fs.mkdirSync(outputPath)
