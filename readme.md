@@ -5,8 +5,6 @@
 
 A simple static-site generator for Enoki sites
 
-#### `Work In Progress`
-
 ## Installation
 ```
 npm i enoki-build
@@ -20,11 +18,12 @@ npm i enoki-build
 usage
   enoki-build [opts] [directories to copy]
 options
-  --app                   the file where the choo app's exported (./index.js)
-  --content               content directory (./content)
+  --app <path>            the file where the choo app's exported (./index.js)
+  --content <path>        content directory (./content)
   --help, -h              show this help text
-  --index                 path of the index.html (./index.html)
-  --output, -o            output directory (./public)
+  --index <path>          path of the index.html (./index.html)
+  --output, -o <dir>      output directory (./public)
+  --sitemap <url>         generate sitemap.xml with base url
   --version, -v           print version
 examples
   start build

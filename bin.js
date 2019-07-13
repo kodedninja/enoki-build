@@ -16,11 +16,12 @@ var argv = minimist(process.argv.slice(2), {
     app: './index.js',
     content: './content',
     index: './index.html',
-    output: './public'
+    output: './public',
+    sitemap: false
   },
   boolean: [
     'help',
-    'version'
+    'version',
   ]
 })
 
@@ -29,11 +30,12 @@ if (argv.help) {
     \n${chalk.dim('usage')}
       ${chalk.green.bold('enoki-build')} [opts] [directories to copy]
     ${chalk.dim('options')}
-      --app                   the file where the choo app's exported (./index.js)
-      --content               content directory (./content)
+      --app <path>            the file where the choo app's exported (./index.js)
+      --content <path>        content directory (./content)
       --help, -h              show this help text
-      --index                 path of the index.html (./index.html)
-      --output, -o            output directory (./public)
+      --index <path>          path of the index.html (./index.html)
+      --output, -o <dir>      output directory (./public)
+      --sitemap <url>         generate sitemap.xml with base url
       --version, -v           print version
     ${chalk.dim('examples')}
       ${chalk.bold('start build')}
@@ -58,5 +60,6 @@ build({
   contentSrc: path.resolve(process.cwd(), argv.content),
   indexSrc: path.resolve(process.cwd(), argv.index),
   outputPath: path.resolve(process.cwd(), argv.output),
-  copyDirs: argv._
+  copyDirs: argv._,
+  sitemap: argv.sitemap
 })

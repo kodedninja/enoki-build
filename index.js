@@ -5,6 +5,7 @@ var decode = require('parse-entities')
 var ncp = require('ncp')
 var path = require('path')
 var rmrf = require('rimraf')
+var nanositemap = require('nanositemap')
 
 module.exports = async function (options) {
   var content = hypha.readSiteSync(options.contentSrc, { parent: true })
@@ -66,6 +67,12 @@ module.exports = async function (options) {
       }
     })
   })
+
+  // generate sitemap
+  if (options.sitemap) {
+    var sm = nanositemap(options.sitemap, Object.keys(content))
+    fs.writeFileSync(options.outputPath + '/sitemap.xml', sm)
+  }
 }
 
 function rmDir (outputPath) {
