@@ -23,6 +23,7 @@ options
   --help, -h              show this help text
   --index <path>          path of the index.html (./index.html)
   --output, -o <dir>      output directory (./public)
+  --keep                  do not clean output directory
   --sitemap <url>         generate sitemap.xml with base url
   --version, -v           print version
 examples

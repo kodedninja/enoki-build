@@ -24,15 +24,21 @@ module.exports = async function (options) {
   // rehydration
   indexHtml = indexHtml.replace('<!-- @head -->', `<script>window.initialState=${JSON.stringify(state)}</script>`)
 
-  // clean directory and ensure it exists
-  if (fs.existsSync(options.outputPath)) {
-    await rmDir(options.outputPath)
+  var outputDirExists = fs.existsSync(options.outputPath)
+  if (!options.keep) {
+    // delete it and remake it
+    if (outputDirExists) {
+      await rmDir(options.outputPath)
+    }
+    fs.mkdirSync(options.outputPath)
+  } else {
+    // ensure it exists
+    ensure(options.outputPath)
   }
-  fs.mkdirSync(options.outputPath)
 
   // make the content folder for files
   // this way we can use the same href on dat and on the built http
-  fs.mkdirSync(options.outputPath + '/content')
+  ensure(options.outputPath + '/content')
 
   // copy directories
   options.copyDirs.map(async dir => {
@@ -52,8 +58,8 @@ module.exports = async function (options) {
       .replace('<!-- @title -->', app.state.title)
 
     // ensure the directory exists
-    !fs.existsSync(outputPath) && fs.mkdirSync(outputPath)
-    !fs.existsSync(contentPath) && fs.mkdirSync(contentPath)
+    ensure(outputPath)
+    ensure(contentPath)
 
     // write content
     fs.writeFileSync(outputPath + '/index.html', resHtml)
@@ -97,4 +103,8 @@ function copy (srcPath, destPath) {
       resolve()
     })
   })
+}
+
+function ensure (path) {
+  !fs.existsSync(path) && fs.mkdirSync(path)
 }
