@@ -11,7 +11,7 @@ npm i enoki-build
 ```
 
 ## Usage
-`enoki-build` was designed to require minimal configuration and to be usable for any Enoki environment.
+`enoki-build` was designed to require minimal configuration and to be compatible with any Enoki environment.
 
 Three things are required: 
 
@@ -32,6 +32,23 @@ For the best experience, I'd recommend using [`@kodedninja/enoki`](https://githu
 - `<!-- @title -->` ― with the title of the current page
 
 For a simple static site, don't include the `@head` part and do not load the bundle script.
+
+Example HTML:
+
+```html
+<html>
+  <head>
+    <title><!-- @title --></title>
+    <!-- @state -->
+  </head>
+  <body>
+    <!-- @content -->
+    <script src="/bundle.js"></script>
+  </body>
+</html>
+```
+
+You can check out my [personal site](https://github.com/kodedninja/hex22.org) as an example.
 
 ## CLI
 ```
