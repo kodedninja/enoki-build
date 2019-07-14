@@ -7,6 +7,10 @@ var path = require('path')
 var rmrf = require('rimraf')
 var nanositemap = require('nanositemap')
 
+var PATTERN_STATE = '<!-- @state -->'
+var PATTERN_CONTENT = '<!-- @content -->'
+var PATTERN_TITLE = '<!-- @title -->'
+
 module.exports = async function (options) {
   var content = hypha.readSiteSync(options.contentSrc, { parent: true })
 
@@ -22,7 +26,7 @@ module.exports = async function (options) {
 
   var indexHtml = fs.readFileSync(options.indexSrc, 'utf8')
   // rehydration
-  indexHtml = indexHtml.replace('<!-- @head -->', `<script>window.initialState=${JSON.stringify(state)}</script>`)
+  indexHtml = indexHtml.replace(PATTERN_STATE, `<script>window.initialState=${JSON.stringify(state)}</script>`)
 
   var outputDirExists = fs.existsSync(options.outputPath)
   if (!options.keep) {
@@ -54,8 +58,8 @@ module.exports = async function (options) {
     var body = app.toString(path, state)
 
     var resHtml = indexHtml
-      .replace('<!-- @content -->', decode(body))
-      .replace('<!-- @title -->', app.state.title)
+      .replace(PATTERN_CONTENT, decode(body))
+      .replace(PATTERN_TITLE, app.state.title)
 
     // ensure the directory exists
     ensure(outputPath)
