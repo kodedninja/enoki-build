@@ -55,10 +55,10 @@ You can check out my [personal site](https://github.com/kodedninja/hex22.org) as
 usage
   enoki-build [opts] [directories to copy]
 options
-  --app <path>            the file where the choo app's exported (./index.js)
-  --content <path>        content directory (./content)
+  --app, -a <path>        the file where the choo app's exported (./index.js)
+  --content, -c <path>    content directory (./content)
   --help, -h              show this help text
-  --index <path>          path of the index.html (./index.html)
+  --index, -i <path>      path of the index.html (./index.html)
   --output, -o <dir>      output directory (./public)
   --keep                  do not clean output directory
   --sitemap <url>         generate sitemap.xml with base url
