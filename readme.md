@@ -28,7 +28,7 @@ For the best experience, I'd recommend using [`@kodedninja/enoki`](https://githu
 `enoki-build` doesn't include bundles or does any magic, but only replaces the following:
 
 - `<!-- @content -->` ― with the HTML output of the app
-- `<!-- @head -->` ― with a `<script>` setting the `window.initialState`
+- `<!-- @state -->` ― with a `<script>` setting the `window.initialState`
 - `<!-- @title -->` ― with the title of the current page
 
 For a simple static site, don't include the `@head` part and do not load the bundle script.
