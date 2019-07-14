@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square" alt="Stability"/>
 </a>
 
-A simple static-site generator for Enoki sites
+A simple static-site generator for [Enoki](https://enoki.site/) sites.
 
 ## Installation
 ```
@@ -11,7 +11,27 @@ npm i enoki-build
 ```
 
 ## Usage
-`TODO`
+`enoki-build` was designed to require minimal configuration and to be usable for any Enoki environment.
+
+Three things are required: 
+
+1. an exported [Choo](https://github.com/choojs/choo/) application using the [`enoki`](https://npmjs.com/package/enoki) module
+2. a [`nanocontent`](https://github.com/jondashkyle/nanocontent) structured directory
+3. an `index.html` file that provides the base
+
+### 1. The App
+
+For the best experience, I'd recommend using [`@kodedninja/enoki`](https://github.com/kodedninja/enoki), instead of the official package, as this contains optimalizations for pre-rendered sites.
+
+### 3. `index.html`
+
+`enoki-build` doesn't include bundles or does any magic, but only replaces the following:
+
+- `<!-- @content -->` ― with the HTML output of the app
+- `<!-- @head -->` ― with a `<script>` setting the `window.initialState`
+- `<!-- @title -->` ― with the title of the current page
+
+For a simple static site, don't include the `@head` part and do not load the bundle script.
 
 ## CLI
 ```
