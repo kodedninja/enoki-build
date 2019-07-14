@@ -1,4 +1,4 @@
-var hypha = require('hypha')
+var nanocontent = require('nanocontent')
 var assert = require('assert')
 var fs = require('fs')
 var decode = require('parse-entities')
@@ -12,7 +12,7 @@ var PATTERN_CONTENT = '<!-- @content -->'
 var PATTERN_TITLE = '<!-- @title -->'
 
 module.exports = async function (options) {
-  var content = hypha.readSiteSync(options.contentSrc, { parent: true })
+  var content = nanocontent.readSiteSync(options.contentSrc, { parent: true })
 
   // require choo app and check if it's valid
   var app = require(options.appSrc)

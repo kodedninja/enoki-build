@@ -16,8 +16,8 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "dedent": "^0.7.0",
-    "hypha": "^0.4.5",
     "minimist": "^1.2.0",
+    "nanocontent": "^0.4.6",
     "nanositemap": "0.0.2",
     "ncp": "^2.0.0",
     "parse-entities": "^1.2.1",
