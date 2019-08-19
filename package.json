@@ -1,6 +1,6 @@
 {
   "name": "enoki-build",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple static-site generator for Enoki sites",
   "main": "index.js",
   "bin": "bin.js",
