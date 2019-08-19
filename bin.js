@@ -24,8 +24,7 @@ var argv = minimist(process.argv.slice(2), {
   },
   boolean: [
     'help',
-    'version',
-    'keep'
+    'version'
   ]
 })
 
@@ -39,7 +38,6 @@ if (argv.help) {
       --help, -h              show this help text
       --index, -i <path>      path of the index.html (./index.html)
       --output, -o <dir>      output directory (./public)
-      --keep                  do not clean output directory
       --sitemap <url>         generate sitemap.xml with base url
       --version, -v           print version
     ${chalk.dim('examples')}
@@ -66,6 +64,5 @@ build({
   indexSrc: path.resolve(process.cwd(), argv.index),
   outputPath: path.resolve(process.cwd(), argv.output),
   copyDirs: argv._,
-  sitemap: argv.sitemap,
-  keep: argv.keep
+  sitemap: argv.sitemap
 })

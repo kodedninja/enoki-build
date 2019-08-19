@@ -13,7 +13,7 @@ npm i enoki-build
 ## Usage
 `enoki-build` was designed to require minimal configuration and to be compatible with any Enoki environment.
 
-Three things are required: 
+Three things are required:
 
 1. an exported [Choo](https://github.com/choojs/choo/) application using the [`enoki`](https://npmjs.com/package/enoki) module
 2. a [`nanocontent`](https://github.com/jondashkyle/nanocontent) structured directory
@@ -60,7 +60,6 @@ options
   --help, -h              show this help text
   --index, -i <path>      path of the index.html (./index.html)
   --output, -o <dir>      output directory (./public)
-  --keep                  do not clean output directory
   --sitemap <url>         generate sitemap.xml with base url
   --version, -v           print version
 examples
